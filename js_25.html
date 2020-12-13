@@ -1,0 +1,77 @@
+<!-- 
+----------------------
+js_25d.html
+----------------------
+    => 예외(Exception)을 학습하자.
+    => 예외(Exception)의 정의
+        웹브라우저에서 내장된 [자바스크립트 엔진이 감지할 수 있는 오류]
+    => 예외(Exception)의 특징
+        자바스크립트 코드에서 예외가 발생하면 예외를 관리하는 [Error 객체]가 자동으로 생성된다.
+        실행 과정 중에 예외가 발생하면 대부분 그 즉시 프로그램이 중단된다.
+    => 예외 처리(Exception handling) -> 입사시험문제
+        예외처리란?
+        프로그램 실행 도중 예외 발생 시 프로그램이 중단되지 않고
+        개발자가 지정한 실행 구문을 실행할 수 있도록 처리하는 것을 말한다.
+    => 예외 처리 구문 형식
+
+            try {
+                예외 발생 예상 실행구문;
+            }cathch(매개변수){
+                예외 발생 시 실행구문;
+            }finally{
+                예외 발생 여부와 관계없이 실행할 실행구문;
+            }
+
+    => [예외 발생 예상 실행구문] 실행중 예외가 발생하면
+       [Error 객체]를 생성하고
+       catch(매개변수){~}구문을 호출한다.
+    => catch(매개변수){~}구문 호출 시 매개변수로는 [Error 객체]의 메위주가 전달된다.
+    => [예외발생 시 실행구문]은 대부분 잘못되었다는 경고이거나 다른 대체 코딩이 나온다.
+    => finally 구문은 생략 가능하다.
+    <참고> Error 객체의 속성변수
+            > 예외를 관리하는 객체이다.
+            > 속성변수
+                message => 예외 메시지 저장
+                number => 예외의 고유코드번호 저장
+                name => 예외 이름 저장
+
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    
+    <script>
+        function getDog(){
+            try{
+                var dog_names = new Array();
+				dog_names.push("불독");
+				dog_names.push("사모예드");
+				dog_names.push("치와와");
+				dog_names.push("말티즈");
+				dog_names.push("진돗개");
+				dog_names.push("삽살개");
+				dog_names.push("풍산개");
+				dog_names.push("시베리안허스키");
+				dog_names.push("말라뮤트");
+				dog_names.push("셰퍼드");
+				dog_names.push("차오차오");
+
+				var dog_no = prompt("강아지 번호를 입력하면 강아지 이름이 뜹니다.");
+				dog_no = parseInt(dog_no, 10);
+				alert(dog_names[dog_no-1]);
+
+            }catch(ex){
+                alert(ex.message);
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+    <a href="javascript:getDog()">강아지 검색</a>
+    
+</body>
+</html>

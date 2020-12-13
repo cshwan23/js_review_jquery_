@@ -1,0 +1,257 @@
+<!-- 
+~~~~~~~~~~~~~~~~~~~~    
+jquery_01.html
+~~~~~~~~~~~~~~~~~~~~
+-----------------
+JQuery란?
+-----------------
+    >공개적으로 개발되고 무료로 제공되는 [사용자 정의 객체] 이름이다.
+        > <참고> 누구나 버그 수정, 성능 향상 그리고 도움말 작성에 참여할 수 있다.
+        > <참고> http://plugins.jquery.com/에 광범위한 라이브러라(~.js)가 있으며
+                꾸준히 업데이트 되고 있고 누구나 버그 수정, 성능향상, 도움말 작성에 참여할수있다
+-----------------
+JQuery 객체 기능
+-----------------
+    > HTML 문서 내의 태그 및 출력 문자열을 삽입, 수정, 삭제를 할 수 있다. 
+    > 그 결과로 웹브라우저 UI에도 변화가 생긴다. 
+    > 웹브라우저에서 각종 [이벤트] 발생 시 실행할 코딩을 설정할 수 있다. 
+    > 웹 서버와 비동기 방식으로 통신할 수 있다. 
+    > CSS 를 설정할 수 있다. 
+    > 애니메이션도 설정할 수 있다. 
+    > 기타 등등. 
+-----------------
+JQuery 객체 장점 
+-----------------
+    > 대부분의 브라우저에서 동일한 결과를 생산한다. 
+        = cross browsing 이라고 한다. 
+        즉 브라우저에 따라 개발자가 다른 코딩을 할 필요가 없다. 
+    > html 코드와 javascript 코드를 분리할 수 있어 유지보수가 편하다.
+-----------------
+JQuery 객체 수입 방법 
+-----------------
+    > jquery-x.x.x.min.js를 다운받고 HTML의 head태그에 아래와 같이 수입하는 코드를 작성한다. 
+    (x는 임의의 버전 번호이다.)
+    <script src = "jquery-1.11.0.min.js"></script>
+    주의 소스 파일과 html 파일과 같은 폴더에 있을 때 쓰는 경로이다. 
+----------------------------------
+JQuery 객체의 메위주를 얻는 방법  
+----------------------------------
+    > JQuery 객체의 메위주를 얻어내면 JQuery 객체의 메소드나 속성변수를 호출할 수 있다. 
+    ----------------------------------
+    jQuery() 함수를 호출하면 JQuery 객체의 메위주를 얻을 수 있다. 
+    ----------------------------------
+    <방법1> jQuery(선택자?)
+        => jQuery()라는 함수를 호출하여 선택자(=태그를 지칭하는 방법)가 가리키는 태그를
+            관리하는 JQeury객체를 생성하고 JQuery 객체의 메위주를 리턴하기.
+            선택자(selector)란 [HTML 문서]내의 [태그를 가리키는 방법]을 말한다. 
+    ----------------------------------
+    <방법2> $(선택자?)
+        => $() 라는 함수를 호출하여 선택자(=태그를 지칭하는 방법)가 가리키는 태그를
+            관리하는 JQeury객체를 생성하고 JQuery 객체의 메위주를 리턴하기.
+            선택자(selector)란 [HTML 문서]내의 [태그를 가리키는 방법]을 말한다. 
+    ----------------------------------
+    <방법3> jQuery
+        => jQuery 라는 변수에 JQuery 객체가 이미 저장 되어있다.
+            (특정 태그를 기리키진 않는다.) 객체 메위주만 갖고있다. 
+    ---------------------------------- 
+    <방법4> $
+        => $ 라는 변수에 JQuery 객체가 이미 저장 되어있다.
+            (특정 태그를 기리키진 않는다.) 객체 메위주만 갖고있다. 
+    ----------------------------------
+----------------------------------
+JQuery 객체의 메소드를 호출하는 방법
+----------------------------------
+    <방법1> jQuery(선택자).메소드(~)
+    ----------------------------------
+    <방법2> $(선택자).메소드(~)
+    ----------------------------------
+    <방법3> jQuery.메소드(~)
+    ----------------------------------
+    <방법4> $.메소드(~)
+    ----------------------------------
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <script src="jquery-1.11.0.min.js"></script>
+    <script src="common_js.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+            $(".save_member").click(function(){
+
+                checkForm();
+            });
+
+            var obj = $(".birth_year");
+
+            for(var i = 2000; i<= new Date().getFullYear();i++){
+                obj.append("<optin vlaue="+i+">"+i+"</option>");
+            }
+
+            var obj = $(".birth_month");
+
+            for(var i =1; i<=12; i++){
+                if(i<10){
+                    obj.append("<option value=0"+i+">0"+i+"</option>");
+                }else{
+                    obj.append("<option value="+i+">"+i+"</option>");
+                }
+            }
+
+            var obj = $(".birth_date");
+
+            for(var i = 1; i<=31; i++){
+                if(i<10){
+                    obj.append("<option value=0"+i+">0"+i+"</option>");
+                }else{
+                    obj.append("<option value="+i+">"+i+"</option>");
+                }
+            }
+
+
+        });
+
+
+
+
+
+
+
+        function checkForm(){
+
+            var uid = $(".uid").val();
+            
+            if(checkID(uid)==false){
+                
+                $(".uid").val("");
+                $(".uid").focus();
+                return;
+            }
+
+            var pwd = $(".pwd").val();
+            if(checkPwd(pwd)==false){
+                $(".pwd").val("");
+                $(".pwd").focus();
+                return;
+            }
+            var pwd_confirm = $(".pwd_confirm").val();
+            if(pwd!=pwd_confirm){
+                alert("비밀번호가 맞지 않습니다.")
+                $(".pwd").val("");
+                $(".pwd_confirm").val("");
+                $(".pwd").focus();
+                return;
+            }
+
+
+            var skill_cnt = $(".skill:checked").length;
+            alert(skill_cnt)
+            if(skill_cnt==0){
+                alert("스킬은 한개이상 선택 요망");
+                return;
+            }
+        }
+
+    </script>
+<body>
+    <form name="memberRegForm">
+        <table border="1" cellpadding="7" cellspacing="0">
+            <tr>
+                <th>아이디</th>
+                <td>
+                    <input type="text" name="uid" class="uid"size=20>
+                </td>
+            </tr>
+            <tr>
+                <th>암호
+                <td><input type="password" name="pwd" class="pwd" size=20>
+            </tr>
+
+            <tr>
+                <th>암호확인
+                <td><input type="password" name="pwd_confirm" class="pwd_confirm" size=20>
+            </tr>
+
+            <tr>
+                <th>소유스킬
+                <td><input type="checkbox" name="skill" class="skill" value="Java">Java
+                    <input type="checkbox" name="skill" class="skill" value="JSP">JSP
+                    <input type="checkbox" name="skill" class="skill" value="Spring">Spring
+                    <input type="checkbox" name="skill" class="skill" value="Oracle">Oracle
+                    <input type="checkbox" name="skill" class="skill" value="mybatis">mybatis
+            </tr>
+
+            <tr>
+                <th>최종학력
+                <td><input type="radio" name="school" class="school" value="고졸">고졸
+                    <input type="radio" name="school" class="school" value="전문대졸">전문대졸
+                    <input type="radio" name="school" class="school" value="일반대졸">일반대졸
+            </tr>
+
+            <tr>
+                <th>거주지역
+                <td><select name="addr" class="addr">
+                        <option value="">--선택--
+                        <option value="서울">서울
+                        <option value="경기">경기
+                        <option value="인천">인천
+                        <option value="전라도">전라도
+                        <option value="경상도">경상도
+                        <option value="부산">부산
+                        <option value="충청도">충청도
+                        <option value="제주도">제주도
+                        <option value="기타">기타
+                    </select>
+            </tr>
+
+            <tr>
+                <th>생일
+                <td><select name="birth_year" class="birth_year">
+                        <option value="">
+
+                    </select>년
+
+                    <select name="birth_month" class="birth_month">
+                        <option value="">
+
+                    </select>월
+
+                    <select name="birth_date" class="birth_date">
+                        <option value="">
+
+                    </select>일
+            </tr>
+            
+            <tr>
+                <th>주민번호(7자리)
+                <td>
+                    <input type="text" name="jumin_num" class="jumin_num" maxlength="7">
+                    
+            </tr>
+
+            <tr>
+                <th>사진
+                <td>
+                    <input type="file" name="pic" class="pic">
+                    
+            </tr>
+
+            <tr>
+                <th>숙지사항
+                <td>입력하신 개인 정보는 회사 소유 입니다.
+                    <input type="checkbox" name="is_confirm" class="is_confirm" value="확인">확인
+                    
+            </tr>
+
+        </table>
+        <input type="button" value="저장" class="save_member">
+        <input type="button" value="초기화">
+
+    </form>
+    
+</body>
+</html>
